@@ -44,7 +44,8 @@ export default function Signup() {
       dispatch(setPage(0));
       localStorage.setItem("page", 0);
     } catch (error) {
-      console.log("Fail to login google account", error.code);
+      console.log("apikey = ", process.env.REACT_APP_FIREBASE_API_KEY);
+      console.log("Fail to login google account", error);
     }
 
     // console.log(userDocRef);
