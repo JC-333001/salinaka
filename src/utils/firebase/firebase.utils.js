@@ -11,7 +11,7 @@ import {
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAkJBkx3CbKjg2X88-lTiLVMKsOHuPj71Q",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "salinaka-db.firebaseapp.com",
   projectId: "salinaka-db",
   storageBucket: "salinaka-db.appspot.com",

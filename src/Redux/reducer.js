@@ -8,6 +8,7 @@ import {
   clearCarts,
   filterShops,
   resetShops,
+  setPages,
 } from "./acitionType";
 let datas = allDatas();
 
@@ -23,10 +24,17 @@ let product = {
     sortByType: "None",
     priceRange: [0, 100],
   },
+
+  page: 0,
 };
 
 let rootReducer = (state = product, action) => {
   switch (action.type) {
+    case setPages:
+      return {
+        ...state,
+        page: action.payload,
+      };
     case addToCarts:
       let { mycolor, myparameter, mysize } = action.payload;
       let { id, name, brand, desc, price, img, parameter, category } =

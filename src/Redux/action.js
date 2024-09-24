@@ -6,6 +6,7 @@ import {
   removeCarts,
   filterShops,
   resetShops,
+  setPages,
 } from "./acitionType";
 // 定义添加至购物车action对象
 export let addToCart = (parameter) => ({
@@ -34,5 +35,9 @@ export let filterShop = (parameter) => ({
 });
 export let resetShop = (parameter) => ({
   type: resetShops,
+  payload: parameter,
+});
+export let setPage = (parameter) => ({
+  type: setPages,
   payload: parameter,
 });

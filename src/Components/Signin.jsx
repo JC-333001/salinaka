@@ -12,6 +12,8 @@ import { UserContext } from "../context/UserContext";
 import "./signin.css";
 import { Link } from "react-router-dom";
 import GoogleIcon from "@mui/icons-material/Google";
+import { useDispatch } from "react-redux";
+import { setPage } from "../Redux/action";
 
 const defaultFormFields = {
   email: "",
@@ -21,6 +23,7 @@ const defaultFormFields = {
 export default function Signin() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(UserContext);
+  const dispatch = useDispatch();
   console.log("hello", setCurrentUser);
   const logGoogleUser = async () => {
     try {
@@ -28,6 +31,8 @@ export default function Signin() {
       const userDocRef = await createUserDocumentFromAuth(user);
       setCurrentUser(user);
       navigate("/");
+      dispatch(setPage(0));
+      localStorage.setItem("page", 0);
     } catch (error) {
       console.log("Fail to login google account", error.code);
     }
@@ -48,6 +53,8 @@ export default function Signin() {
       let userInfo = await getUserInfo(user);
       setCurrentUser({ ...user, displayName: userInfo.displayName });
       navigate("/");
+      dispatch(setPage(0));
+      localStorage.setItem("page", 0);
     } catch (error) {
       console.log("Invalid email and password");
     }

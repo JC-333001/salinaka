@@ -11,6 +11,9 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import "./signup.css";
 import GoogleIcon from "@mui/icons-material/Google";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { setPage } from "../Redux/action";
 
 const defaultFormFields = {
   displayName: "",
@@ -22,12 +25,10 @@ const defaultFormFields = {
 export default function Signup() {
   let navigate = useNavigate();
 
-  //用户数据存储在云端Firebase
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password } = formFields;
-
-  // console.log(formFields);
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -40,6 +41,8 @@ export default function Signup() {
       const userDocRef = await createUserDocumentFromAuth(user);
       setCurrentUser(user);
       navigate("/");
+      dispatch(setPage(0));
+      localStorage.setItem("page", 0);
     } catch (error) {
       console.log("Fail to login google account", error.code);
     }
@@ -50,6 +53,10 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters");
+        return;
+      }
       let { user } = await createAuthUserWithEmailAndPassword(email, password);
       const userDocRef = await createUserDocumentFromAuth(user, {
         displayName,
@@ -59,6 +66,8 @@ export default function Signup() {
       console.log("sign up here");
       resetFormFields();
       navigate("/");
+      dispatch(setPage(0));
+      localStorage.setItem("page", 0);
     } catch (error) {
       if (error.code == "auth/email-already-in-use") {
         alert("Cannot create user, email already in use");

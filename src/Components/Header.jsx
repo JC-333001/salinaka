@@ -14,6 +14,9 @@ import { UserContext } from "../context/UserContext";
 import { signOutUser } from "../utils/firebase/firebase.utils";
 import { createUserDocumentFromAuth } from "../utils/firebase/firebase.utils";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setPage } from "../Redux/action";
 
 export default function Header() {
   const { currentUser, setCurrentUser } = useContext(UserContext);
@@ -26,16 +29,28 @@ export default function Header() {
   }
   // console.log("hihi", currentUser);
   let navigate = useNavigate();
-  //   let nav = () => {
-  //     navigate("/");
-  //   };
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
-  const [index, setIndex] = useState(0);
+
   const [searchQuery, setSearchQuery] = useState("");
+  const dispatch = useDispatch();
+  const page = useSelector((state) => state.page);
+
+  useEffect(() => {
+    let page = localStorage.getItem("page");
+    if (page) {
+      dispatch(setPage(parseInt(page)));
+    }
+    return () => {
+      // This function will run when the component unmounts
+      localStorage.clear();
+    };
+  }, []);
 
   let clickHandler = (i) => {
-    setIndex(i);
+    dispatch(setPage(i));
+    localStorage.setItem("page", i);
   };
 
   let changeHandler = (e) => {
@@ -65,7 +80,7 @@ export default function Header() {
               onClick={() => {
                 clickHandler(0);
               }}
-              style={{ color: index === 0 ? "black" : "#8a8a8a" }}
+              style={{ color: page === 0 ? "black" : "#8a8a8a" }}
             >
               <img className='headerLogo' src={logo} alt='' />
             </Link>
@@ -77,7 +92,7 @@ export default function Header() {
               onClick={() => {
                 clickHandler(0);
               }}
-              style={{ color: index === 0 ? "black" : "#8a8a8a" }}
+              style={{ color: page === 0 ? "black" : "#8a8a8a" }}
             >
               Home
             </Link>
@@ -88,7 +103,7 @@ export default function Header() {
               onClick={() => {
                 clickHandler(1);
               }}
-              style={{ color: index === 1 ? "black" : "#8a8a8a" }}
+              style={{ color: page === 1 ? "black" : "#8a8a8a" }}
             >
               Shop
             </Link>
@@ -98,7 +113,7 @@ export default function Header() {
               onClick={() => {
                 clickHandler(2);
               }}
-              style={{ color: index === 2 ? "black" : "#8a8a8a" }}
+              style={{ color: page === 2 ? "black" : "#8a8a8a" }}
             >
               Featured
             </Link>
@@ -108,15 +123,14 @@ export default function Header() {
               onClick={() => {
                 clickHandler(3);
               }}
-              style={{ color: index === 3 ? "black" : "#8a8a8a" }}
+              style={{ color: page === 3 ? "black" : "#8a8a8a" }}
             >
               Recommended
             </Link>
           </div>
 
-          {index == 1 ? <Filter></Filter> : null}
-
           <div className='search_bar_container'>
+            {page == 1 ? <Filter></Filter> : null}
             <form className='search_bar' onSubmit={submitHandler}>
               <span className='magnifier'>
                 <svg
@@ -158,28 +172,29 @@ export default function Header() {
           </div>
           <div className='user_auth'>
             {!currentUser ? (
-              [
+              <div style={{ display: "flex", justifyContent: "center" }}>
                 <Link
                   className='signUp'
                   to='/signup'
                   key='signup'
                   onClick={() => {
-                    setIndex(null);
+                    dispatch(setPage(null));
                   }}
                 >
                   Sign Up
-                </Link>,
+                </Link>
+
                 <Link
                   className='signIn'
                   to='/signin'
                   key='signin'
                   onClick={() => {
-                    setIndex(null);
+                    dispatch(setPage(null));
                   }}
                 >
                   Sign In
-                </Link>,
-              ]
+                </Link>
+              </div>
             ) : (
               <div className='user_account'>
                 <span
@@ -199,8 +214,9 @@ export default function Header() {
                       try {
                         await signOutUser();
                         setCurrentUser(null);
-                        setIndex(null);
+                        dispatch(setPage(null));
                         navigate("/signin");
+                        localStorage.setItem("page", 0);
                         setIsAccountOpen(false);
                       } catch (error) {
                         console.log("Fail to sign out", error.code);
