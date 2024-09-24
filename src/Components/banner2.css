@@ -1,0 +1,32 @@
+.banner2Container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f0f0;
+    height: 400px;
+}
+
+.banner2Img {
+    background: transparent;
+}
+
+.banner2Img>Img {
+    height: 400px;
+    background: transparent;
+}
+
+.banner2Text {
+    font-family: 'Gill Sans';
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    padding-right: 100px;
+    background: transparent;
+}
+
+.banner2Text>h1 {
+    font-size: 48px;
+    font-weight: 400;
+    margin-bottom: 30px;
+    background: transparent;
+}

@@ -1,0 +1,66 @@
+.bannerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.bannerImg {
+  background: transparent;
+  overflow: hidden;
+}
+
+.bannerImg > Img {
+  height: 400px;
+  background: transparent;
+}
+
+.bannerText {
+  font-family: "Gill Sans";
+  display: flex;
+  flex-direction: column;
+  padding-left: 50px;
+  padding-right: 100px;
+  background: transparent;
+}
+
+.bannerText > h1 {
+  font-size: 48px;
+  font-weight: 400;
+  margin-bottom: 30px;
+  background: transparent;
+}
+
+.bannerText > h1 > strong {
+  font-weight: 600;
+  background: transparent;
+}
+
+.bannerText > h6 {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 30px;
+  background: transparent;
+}
+
+.shopButton {
+  height: 50px;
+  width: 125px;
+  text-decoration: none;
+  font-family: "Gill Sans";
+  font-size: 14px;
+  font-weight: 600;
+  color: #e1e1e1;
+  background-color: #101010;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shopButton > svg {
+  margin-left: 8px;
+}
+
+.shopButton:hover {
+  background-color: #242424;
+}

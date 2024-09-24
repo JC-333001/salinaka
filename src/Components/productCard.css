@@ -1,0 +1,45 @@
+.productList {
+    list-style: none;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-gap: 2rem;
+}
+
+.productList>a {
+    text-decoration: none;
+}
+
+.list {
+    border: 1px solid #e1e1e1;
+}
+
+.list>div {
+    overflow: hidden;
+    height: 200px;
+}
+
+.list>div>img {
+    background-color: #f0f0f0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: 0.5s all ease-in-out;
+}
+
+.list:hover img {
+    transform: scale(1.2);
+}
+
+.list>h2 {
+    font-size: 24px;
+    color: #1a1a1a;
+    margin: 20px 20px 10px;
+}
+
+.list>h3 {
+    font-size: 16px;
+    color: #818181;
+    margin: 0px 20px 20px;
+}

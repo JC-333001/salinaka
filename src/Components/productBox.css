@@ -1,0 +1,26 @@
+.productBoxContainer {
+    width: 100%;
+}
+
+.productTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Gill Sans';
+    margin-bottom: 20px;
+}
+
+.productTitle2 {
+    display: none;
+}
+
+.productTitle>h1 {
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.productTitle>a {
+    font-size: 18px;
+    font-weight: 400;
+    color: #101010;
+}

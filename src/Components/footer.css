@@ -1,0 +1,25 @@
+.footerContainer {
+    background-color: #f0f0f0;
+    padding: 30px 60px 60px;
+
+}
+
+.footerContainer>img {
+    width: 150px;
+    height: 60px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+}
+
+.footerText {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Gill Sans';
+    font-size: 12px;
+}
+
+.footerText>p>a {
+    color: #4a4a4a;
+}
